@@ -32,6 +32,15 @@ class PostController extends Controller
 
         $dati = $request->all();
         $slug = Str::of($dati['title'])->slug('-');
+        $slug_iniziale = $slug;
+        $post_trovato = Post::where('slug', $slug)->first();
+        $contatore = 1;
+        while ($post_trovato) {
+            $slug = $slug_iniziale.'-'.$contatore;
+            $post_trovato = Post::where('slug', $slug)->first();
+            $contatore ++;
+        }
+
         $dati['slug'] = $slug;
         $nuovo_post = new Post();
         $nuovo_post->fill($dati);
@@ -73,6 +82,15 @@ class PostController extends Controller
 
         $dati = $request->all();
         $slug = Str::of($dati['title'])->slug('-');
+        $slug_iniziale = $slug;
+        $post_trovato = Post::where('slug', $slug)->first();
+        $contatore = 1;
+        while ($post_trovato) {
+            $slug = $slug_iniziale.'-'.$contatore;
+            $post_trovato = Post::where('slug', $slug)->first();
+            $contatore ++;
+        }
+
         $dati['slug'] = $slug;
 
         $post->update($dati);
