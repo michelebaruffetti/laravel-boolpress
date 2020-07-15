@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/posts', 'PostController@index')->name('posts');
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('admin') ->namespace('Admin')
 ->name('admin.') ->middleware('auth') ->group(function () {
 Route::get('/', 'HomeController@index') ->name('home');
-Route::resource('/posts', 'PostController'); 
+Route::resource('/posts', 'PostController');
 });
