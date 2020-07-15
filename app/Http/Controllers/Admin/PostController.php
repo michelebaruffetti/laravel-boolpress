@@ -53,13 +53,32 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        if($post) {
+            return view('admin.posts.edit', compact('post'));
+        } else {
+            return abort('404');
+        }
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+
+        $request->validate([
+            'title' => 'required|max:255|unique:posts,title',
+            'content' => 'required'
+        ]);
+
+        $dati = $request->all();
+        $slug = Str::of($dati['title'])->slug('-');
+        $dati['slug'] = $slug;
+
+        $post->update($dati);
+
+
+        return redirect()-> route('admin.posts.index');
     }
 
 
