@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-1O">
+            <div class="col-1O">
                 <h1>Modifica post!</h1>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -24,6 +24,19 @@
                     <div class="form-group">
                         <label for="testo">Testo articolo</label>
                         <textarea type="text" name="content" class="form-control" id="testo" placeholder="Scrivi qualcosa ...">{{ old('content', $post->content) }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria"></label>
+                        <select id="categoria "class="form-control" name="category_id">
+                            <option value="">Seleziona Categoria</option>
+                            @foreach ($categories as $category )
+                                 <option value="{{$category->id}}"
+                                     {{($post->category->id ?? '') == $category->id ? 'selected' : ''}}>
+                                     {{$category->name}}
+                                 </option>
+                            @endforeach
+                        </select>
+
                     </div>
                     <button type="submit" class="btn btn-primary">Salva</button>
 

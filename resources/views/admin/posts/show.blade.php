@@ -13,6 +13,7 @@
             <h3>Titolo: {{ $post->title }}</h3>
 
             <p>Contenuto: {{ $post->content}}</p>
+            <p>Categoria: {{ $post->category->name ?? '-'}}</p>
 
             <p><small>creato il: {{$post->created_at}}</small></p>
             <small>modificato il: {{$post->updated_at}}</small>
